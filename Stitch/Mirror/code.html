@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Mirror | CrownCheck AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#3f3039",
+                        "surface-dim": "#1c1018",
+                        "outline": "#9c8d94",
+                        "secondary-fixed-dim": "#f2b7c1",
+                        "secondary-container": "#653b43",
+                        "on-tertiary-fixed": "#3c070b",
+                        "secondary-fixed": "#ffd9de",
+                        "on-primary-fixed-variant": "#673657",
+                        "on-secondary-fixed-variant": "#653b43",
+                        "surface-bright": "#44353e",
+                        "primary-fixed-dim": "#f4b3db",
+                        "inverse-primary": "#824d70",
+                        "tertiary-fixed": "#ffdad8",
+                        "inverse-surface": "#f4dce8",
+                        "on-surface-variant": "#d3c2ca",
+                        "primary-fixed": "#ffd8ed",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#321118",
+                        "surface-container-lowest": "#160a12",
+                        "tertiary-container": "#6f2e2f",
+                        "inverse-on-surface": "#3b2c35",
+                        "background": "#1c1018",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#3f3039",
+                        "on-secondary-container": "#dfa6b0",
+                        "surface": "#1c1018",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#4b252d",
+                        "secondary": "#f2b7c1",
+                        "primary": "#f4b3db",
+                        "tertiary": "#ffb3b1",
+                        "on-primary": "#4d2040",
+                        "surface-container-high": "#34262f",
+                        "error-container": "#93000a",
+                        "primary-container": "#623253",
+                        "tertiary-fixed-dim": "#ffb3b1",
+                        "on-background": "#f4dce8",
+                        "on-tertiary": "#581c1e",
+                        "surface-tint": "#f4b3db",
+                        "on-primary-fixed": "#340a2a",
+                        "surface-container": "#291c24",
+                        "surface-container-low": "#251820",
+                        "on-primary-container": "#db9cc3",
+                        "on-tertiary-container": "#f19795",
+                        "outline-variant": "#4f434a",
+                        "on-surface": "#f4dce8",
+                        "on-tertiary-fixed-variant": "#743233"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(63, 48, 57, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .scrolling-touch {
+            -webkit-overflow-scrolling: touch;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .mirror-viewport {
+            aspect-ratio: 9/16;
+            max-height: 75vh;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-zinc-950/80 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+<div class="text-2xl font-black tracking-tighter text-fuchsia-500 dark:text-fuchsia-400 font-plus-jakarta">
+                CrownCheck AI
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-plus-jakarta font-bold tracking-tight text-fuchsia-500 dark:text-fuchsia-400 border-b-2 border-fuchsia-500 pb-1 hover:opacity-80 transition-all duration-300 scale-95 duration-150 active:scale-90" href="#">Mirror</a>
+<a class="font-plus-jakarta font-bold tracking-tight text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:opacity-80 transition-all duration-300 scale-95 duration-150 active:scale-90" href="#">Lookbook</a>
+<a class="font-plus-jakarta font-bold tracking-tight text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:opacity-80 transition-all duration-300 scale-95 duration-150 active:scale-90" href="#">Consultants</a>
+<a class="font-plus-jakarta font-bold tracking-tight text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:opacity-80 transition-all duration-300 scale-95 duration-150 active:scale-90" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-zinc-400 hover:text-fuchsia-400 transition-colors">dark_mode</button>
+<button class="material-symbols-outlined text-zinc-400 hover:text-fuchsia-400 transition-colors">account_circle</button>
+</div>
+</nav>
+</header>
+<main class="relative min-h-screen pt-4 pb-32">
+<!-- Main Content Area -->
+<div class="container mx-auto px-4 md:px-8">
+<div class="flex flex-col lg:flex-row gap-12 items-start">
+<!-- Mirror Viewport Section -->
+<div class="w-full lg:w-2/3 xl:w-3/4 relative mx-auto">
+<!-- Asymmetric Label -->
+<div class="mb-6">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-primary mb-2 block">Augmented Reality Interface</span>
+<h1 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tighter text-on-background">The Mirror</h1>
+</div>
+<!-- Camera Viewport Container -->
+<div class="relative w-full mirror-viewport bg-surface-container rounded-xl overflow-hidden group">
+<img alt="Live AR feedback" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700" data-alt="Close up portrait of a stylish man looking into a camera with digital interface overlays and soft neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUwx1oUd1-zrsTZqv2lOHuU96Pg429BX3-l7OmrYm4KQcz-MsCYr4S7d1uEiQm50WJQ9MBJ5stj7hsvVtrIP-U0SHCsvT_rAi-s4WhSbvVlxD3lwb0eDmdJ3dEINkMyquTLc_mvte_wu1RQto-d3ZzlMB0sSlJXAz3n5T1BTxBYOcrcmgDiHoVilMzedUJ7Q4GFzuMSsHbc0GKaRMd3VZYIxej9eVjHt6JhROLB4BzsOYYJlYuttcYwzW6JntfQSGVLf66pB17qJo"/>
+<!-- Scanning Reticle Overlay -->
+<div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+<div class="w-64 h-64 border-2 border-primary/40 rounded-full animate-pulse flex items-center justify-center">
+<div class="w-48 h-48 border border-primary/20 rounded-full"></div>
+</div>
+</div>
+<!-- Top Floating Controls -->
+<div class="absolute top-6 left-6 right-6 flex justify-between items-center">
+<div class="glass-panel px-4 py-2 rounded-full flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-red-500 animate-ping"></div>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface/80">Live AI Detection</span>
+</div>
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-on-surface hover:bg-primary-container transition-colors duration-300">
+<span class="material-symbols-outlined">flip_camera_ios</span>
+</button>
+</div>
+<!-- Bottom Floating Controls (Overlay Controls) -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6">
+<button class="w-14 h-14 glass-panel rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<!-- Capture Button -->
+<button class="group relative p-1 rounded-full border-4 border-primary/50 hover:border-primary transition-all">
+<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-on-primary shadow-[0_0_20px_rgba(244,179,219,0.4)] active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+</button>
+<button class="w-14 h-14 glass-panel rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Technical Specs / Side Content (Asymmetric Layout) -->
+<div class="hidden xl:flex flex-col gap-8 w-1/4 pt-20">
+<div class="bg-surface-container-low p-8 rounded-xl">
+<h3 class="font-headline text-lg font-bold mb-4 text-primary">Detection Specs</h3>
+<ul class="space-y-6">
+<li class="flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase text-outline">Face Shape</span>
+<span class="text-on-surface font-medium">Strong Jawline / Oval</span>
+</li>
+<li class="flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase text-outline">Hair Texture</span>
+<span class="text-on-surface font-medium">Type 2C Wavy</span>
+</li>
+<li class="flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase text-outline">Suggested Fade</span>
+<span class="text-on-surface font-medium">Mid-Drop Fade</span>
+</li>
+</ul>
+</div>
+<div class="relative aspect-square rounded-xl overflow-hidden group">
+<img alt="Style match" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Close up of a professional barber finishing a clean fade haircut with precision tools in a high-end salon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXqHQGDS5tL1AtOqWiyDuHqVNyCXLxHfyRjnTc9EqS9Tu10OJSGsAjTPZNmpccmORe5wq7maZiyCIFoiXdZcpKbuzwdTfs29Sy3two-FFlZ6KvGXt7PIJzXczstSIoc3Btckbtz0OBSaRjQUU3xWDg7rjMZ8k40IHuPtUucv6XYk3VdeKkNax5CQofybolHQZq5Gosod-WIYP6wPN_D333-vV2Y06SZNHXl0cZnprrFKvXDpc8Sj0gn9Sklw-TWZpJlUTmAUhPcMw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Top Consultant Choice</span>
+<p class="text-sm font-bold">The Executive Cut</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Style Carousel (Floating Drawer Aesthetic) -->
+<div class="fixed bottom-0 left-0 right-0 z-40 pb-6 pt-12 bg-gradient-to-t from-background via-background/95 to-transparent">
+<div class="container mx-auto px-8">
+<div class="flex items-end justify-between mb-4">
+<div class="flex gap-4">
+<button class="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-label text-xs font-bold uppercase tracking-wider">All Styles</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface/60 font-label text-xs font-bold uppercase tracking-wider hover:text-on-surface transition-colors">Fades</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface/60 font-label text-xs font-bold uppercase tracking-wider hover:text-on-surface transition-colors">Braids</button>
+<button class="px-6 py-2 rounded-full bg-surface-container-high text-on-surface/60 font-label text-xs font-bold uppercase tracking-wider hover:text-on-surface transition-colors">Long</button>
+</div>
+<a class="text-primary font-label text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-70 transition-opacity" href="#">
+                        View Full Lookbook <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 scrolling-touch">
+<!-- Style Item 1 -->
+<div class="flex-shrink-0 w-32 md:w-44 group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all duration-300">
+<img alt="Style thumbnail" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500" data-alt="Editorial portrait of a man with a sharp buzz cut and fade, minimalist studio lighting, high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpor41f2W8BrXlMZEtWDnS22tjy4WFNUPloH9TUsaVUEjkTnYOjvPK7m3CxIqZQvPjLIc0XvLL6VF4Xh_rEoSztVSjk1Uu9ripgL5n6e1ngDvuBrHUi90UlH0jrLqhRtwP3dVlW60u4_T0syAM8E1XpkC1NBj1ASHZm9Bt0cVxLsQ93HC-P1BbgPVhz95WX_RPjfazeUDWI5ZhgWNW9QLyvuC1Uac1bGapIebT-wgSnVH4BUV-z2mpc4BKMkw2iCFkqk-wd2PCRic"/>
+</div>
+<p class="font-label text-[10px] uppercase text-outline text-center group-hover:text-primary transition-colors">Modern Buzz</p>
+</div>
+<!-- Style Item 2 -->
+<div class="flex-shrink-0 w-32 md:w-44 group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 border-2 border-primary shadow-[0_0_15px_rgba(244,179,219,0.3)]">
+<img alt="Active style" class="w-full h-full object-cover" data-alt="Professional studio shot of a medium length textured hair style for men, soft directional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcu4o5qz-gMJbf7JBtmqzQPmwztAVC9ffRNkFVUrKC2Yo7ZH9F7Jx5N7JpJUstwrowGjLSLjZDqdbWI67ssvgy3k4Oz5J1XdaH3N5igYTCYDbicR_awJ1MGGe2aZ4cwWtFqHjavaAb1LX5qfI8mPsj06Z6Zhk4c2JFbvBSBlu4KGFhw0I3rug_5sKY93v1VgsUmDnfRsmcX0ijTB2_sXbWydHtpj519Sp-Kmq7-GKVSelLWZMHJgArBOBNFV1yw496oHiQTzEA45o"/>
+</div>
+<p class="font-label text-[10px] uppercase text-primary text-center">Textured Crop</p>
+</div>
+<!-- Style Item 3 -->
+<div class="flex-shrink-0 w-32 md:w-44 group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all duration-300">
+<img alt="Style thumbnail" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500" data-alt="Modern braided hairstyle for men, intricate patterns, vibrant dark studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJJN3ZaAb75QJwyVHtVv3bn46_AEUSrLPtt4UFT3cNyFptzG6Z8MuycIi_qpcI07dsdMyqxhaANzg7I_YslTm3VoNIAibjUn4x-SEzIInIWQCcTvGC-gpSbpiOabaLwTABwcW78s-5NBqfejE6m7nft1YSN5yKKwEq4alzQ_CQrn-STqNSlVLh_z2_rXbomCPF2I0PfeQq_MdrVDAvl0hjQv_1wj0yeYVZBGwZUALCLDUWIzDeZVRJWKvEh5vJ9oWjG60GcnW2slo"/>
+</div>
+<p class="font-label text-[10px] uppercase text-outline text-center group-hover:text-primary transition-colors">Box Braids</p>
+</div>
+<!-- Style Item 4 -->
+<div class="flex-shrink-0 w-32 md:w-44 group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all duration-300">
+<img alt="Style thumbnail" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500" data-alt="Classic pompadour haircut, sleek styling, warm ambient lighting in a vintage barbershop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNnCmIflL3D5ygyY3A_sKqXAQbiigfyClIelPXkY2w9vn3ka13QMHSCBHZAKjlAYFVe7EEc_MgZUJjPpAFFyqHUbAWh39UgkwKvsiQ3yZWBqn6tr4ypc8W5i0gZnuw3W460bh9e55Wrx_djQvvjiiVD_0jxk8kKtBET1ngh3bpsc7mkcfYPrO0X_ajW8PGivYWLwo8-PKXomWyfFrNvpa4xx6AYjuLjTV2wi9K6-8isallBHZmAhuM_23Yv2ksxjucKK0GV9XZEXo"/>
+</div>
+<p class="font-label text-[10px] uppercase text-outline text-center group-hover:text-primary transition-colors">Taper Pompadour</p>
+</div>
+<!-- Style Item 5 -->
+<div class="flex-shrink-0 w-32 md:w-44 group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all duration-300">
+<img alt="Style thumbnail" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500" data-alt="Long wavy hair for men, natural flow, soft outdoor sunset lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD9rNdXOCFEDaiTERsxQP-vJbssEPo1HejhWf5IzYmv7Z9cH-CVNX3ZcKWsGfCUk84X0BiVQxELeFJ20g2Xba_k_cWXvPXAb2zwiLuB5z0m4rvdHp4dEwkt-zzqIc_d3e60gKeNBk9OU0VsUjRBPmFJwgxq-DR9WM8L05gmv_61OZx3sUFsZAmPGlq2TsM6BR0YS2ZD92rbLUolG5eMlYDxBjodf1Jkh1RxqFZ-S80a0-ji_4KNs4zZ7LHWUG0_d_P8EUZhx3bsiw"/>
+</div>
+<p class="font-label text-[10px] uppercase text-outline text-center group-hover:text-primary transition-colors">Wavy Flow</p>
+</div>
+<!-- Style Item 6 -->
+<div class="flex-shrink-0 w-32 md:w-44 group cursor-pointer">
+<div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary transition-all duration-300">
+<img alt="Style thumbnail" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500" data-alt="Clean skin fade with sharp line up, dramatic monochrome lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACciN9kb1Blw7uCzRZ8syV98e9FWmgqtS2GhyLH2w6hXM_wdWj8E9K73y1ZywfOXEoq3KQS7kGC-LL2XRbC1CdZcHL9db9r6_PQ0I2GQk035sCAZfyZxLRxLTSAswdES9honTQYOAHqiQKcRepC6X8KL3U5CJ6JTgkYIsQwKsMMghe_XoyYn2JaroQKReDXlm9dWXRFzflIv1BGfaiak5rc5rw17VRKUkK2jiOPz-ckOd0pvShBH5tCt6bWT_2f0QSUHSjAS4R7oU"/>
+</div>
+<p class="font-label text-[10px] uppercase text-outline text-center group-hover:text-primary transition-colors">Bald Fade</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Suppressed on main AR focus, but following design system for structure) -->
+<footer class="full-width mt-20 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200/10 hidden md:block">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center">
+<div class="font-manrope text-xs uppercase tracking-[0.1em] text-zinc-400">
+                © 2024 CrownCheck AI. All Rights Reserved.
+            </div>
+<div class="flex gap-8 mt-6 md:mt-0">
+<a class="font-manrope text-xs uppercase tracking-[0.1em] text-zinc-400 hover:text-fuchsia-400 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs uppercase tracking-[0.1em] text-zinc-400 hover:text-fuchsia-400 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-manrope text-xs uppercase tracking-[0.1em] text-zinc-400 hover:text-fuchsia-400 transition-colors duration-200" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</body></html>
