@@ -1,57 +1,42 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { 
-  Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
-} from "lucide-react";
-
 export default function LookCard({ look, featured = false }: { look: any; featured?: boolean }) {
   return (
-    <div className={`group relative rounded-[2rem] overflow-hidden bg-surface-container border border-white/5 ${featured ? 'aspect-16/10' : 'aspect-square'}`}>
+    <div 
+      className={`group relative overflow-hidden rounded-[2rem] bg-surface-container transition-all hover:-translate-y-2 duration-300 ${
+        featured ? 'md:col-span-8 aspect-[16/10] md:h-[500px]' : 'md:col-span-4 h-[400px]'
+      }`}
+    >
       <img 
         src={look.image} 
         alt={look.title}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-60 group-hover:opacity-100"
         referrerPolicy="no-referrer"
       />
-      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80" />
       
       <div className="absolute top-6 right-6">
-        <div className="glass-card px-4 py-2 rounded-xl border border-white/10 flex flex-col items-center">
-          <div className="text-[8px] font-bold uppercase tracking-widest text-white/60">Match Accuracy</div>
-          <div className="text-xl font-bold text-white">{look.accuracy}</div>
+        <div className="glass-panel px-4 py-3 rounded-2xl flex flex-col items-center">
+          <span className="text-[10px] font-bold text-primary font-sans uppercase tracking-widest leading-none mb-1">Match Accuracy</span>
+          <span className={`${featured ? 'text-3xl' : 'text-xl'} font-display font-extrabold text-on-surface`}>{look.accuracy}</span>
         </div>
       </div>
 
       <div className="absolute bottom-8 left-8 right-8">
         {look.series && (
-          <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-2">{look.series}</div>
+          <span className="text-primary font-display font-bold text-sm tracking-[0.2em] uppercase mb-2 block">{look.series}</span>
         )}
-        <h3 className={`${featured ? 'text-4xl' : 'text-2xl'} font-bold text-white mb-6`}>{look.title}</h3>
+        <h2 className={`${featured ? 'text-4xl' : 'text-2xl'} font-display font-bold text-on-surface mb-4`}>{look.title}</h2>
         
-        {featured ? (
+        {featured && (
           <div className="flex gap-3">
-            <button className="bg-primary text-white px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-primary-dark transition-colors">
+            <button className="px-6 py-2.5 bg-primary text-on-primary font-bold rounded-xl text-sm hover:brightness-110 transition-all font-sans">
               Try In AR
             </button>
-            <button className="glass-card w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors">
-              <Heart size={16} />
+            <button className="p-2.5 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-all">
+              <span className="material-symbols-outlined text-white">favorite</span>
             </button>
           </div>
-        ) : (
-          <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors">
-            View Details <ArrowRight size={14} />
-          </button>
         )}
       </div>
-
-      {featured && look.id === 2 && (
-        <div className="absolute bottom-8 right-8">
-          <button className="glass-card px-6 py-3 rounded-full flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white/10 transition-colors">
-            <Box size={18} /> Live Preview
-          </button>
-        </div>
-      )}
     </div>
   );
 }
-

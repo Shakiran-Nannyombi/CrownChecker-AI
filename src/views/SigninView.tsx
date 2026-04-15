@@ -1,137 +1,163 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { 
-  Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
-} from "lucide-react";
+import { useState } from "react";
+import { motion } from "motion/react";
 import { View } from "../types";
 
-export default function SigninView({ onBack, onSignUp, onComplete, theme, toggleTheme }: { onBack: () => void; onSignUp: () => void; onComplete: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
+export default function SigninView({ 
+  onBack, 
+  onSignUp, 
+  onComplete, 
+  theme, 
+  toggleTheme 
+}: { 
+  onBack: () => void; 
+  onSignUp: () => void; 
+  onComplete: () => void; 
+  theme: "dark" | "light"; 
+  toggleTheme: () => void 
+}) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <motion.div
       key="signin"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="min-h-screen flex flex-col items-center justify-center p-8 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen flex flex-col bg-surface relative overflow-x-hidden selection:bg-primary/30 font-sans"
     >
-      {/* Theme Toggle */}
-      <div className="absolute top-8 right-8 z-50">
-        <button 
-          onClick={toggleTheme}
-          className="text-on-surface/60 hover:text-primary transition-colors p-2 rounded-full hover:bg-on-surface/5"
-        >
-          {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
-        </button>
-      </div>
-      {/* Background Decorative Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full -z-10" />
-
-      <div className="text-center mb-12">
-        <button 
-          onClick={onBack}
-          className="font-display font-extrabold text-5xl tracking-tighter mb-2 block"
-        >
-          CrownCheck <span className="text-primary">AI</span>
-        </button>
-        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">The Ethereal Precision</p>
+      {/* Hero Background Elements */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px]"></div>
       </div>
 
-      <div className="w-full max-lg bg-surface-container-low rounded-[2.5rem] p-12 md:p-16 shadow-2xl border border-white/5 relative">
-        <div className="mb-12">
-          <h2 className="headline-section text-4xl mb-4">Welcome Back</h2>
-          <p className="text-on-surface-variant text-sm leading-relaxed">
-            Sign in to access your digital lookbook and AR styling tools.
-          </p>
-        </div>
-
-        <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); onComplete(); }}>
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Email Address</label>
-              <div className="relative group">
-                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
-                <input 
-                  type="email" 
-                  required
-                  placeholder="name@example.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
-                />
+      <main className="flex-grow flex items-center justify-center p-6 z-10">
+        <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-0 overflow-hidden rounded-[2rem] bg-surface-container-low shadow-2xl border border-outline/10">
+          {/* Left Side: Editorial Content */}
+          <div className="hidden lg:flex flex-col justify-between p-12 bg-surface-container relative overflow-hidden">
+            <div className="z-10">
+              <button 
+                onClick={onBack}
+                className="text-4xl font-display font-black tracking-tighter text-primary mb-2 hover:opacity-80 transition-opacity"
+              >
+                CrownCheck AI
+              </button>
+              <p className="text-on-surface-variant font-sans text-lg max-w-xs leading-relaxed">
+                Elevate your aesthetic with AI-driven grooming precision.
+              </p>
+            </div>
+            
+            <div className="z-10 mt-12 space-y-8">
+              <div className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>login</span>
+                <div>
+                  <h3 className="font-display font-bold text-on-surface">Secure Access</h3>
+                  <p className="text-sm text-on-surface-variant font-sans">Enter your credentials to access your personalized grooming profile.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>history</span>
+                <div>
+                  <h3 className="font-display font-bold text-on-surface">Style History</h3>
+                  <p className="text-sm text-on-surface-variant font-sans">Review past transformations and consultant recommendations.</p>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="flex justify-between items-center px-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Password</label>
-                <button type="button" className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-primary-container transition-colors">Forgot Password?</button>
-              </div>
-              <div className="relative group">
-                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
-                <input 
-                  type={showPassword ? "text" : "password"} 
-                  required
-                  placeholder="••••••••"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-14 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
-                />
-                <button 
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-5 top-1/2 -translate-y-1/2 text-white/20 hover:text-on-surface transition-colors"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
+            {/* Background Graphic */}
+            <div className="absolute right-[-20%] bottom-[-10%] w-full h-2/3 opacity-40">
+              <img 
+                alt="Barber shop silhouette" 
+                className="w-full h-full object-cover grayscale rounded-tl-[100px]" 
+                src="https://images.unsplash.com/photo-1599351431247-f10b21ce5602?auto=format&fit=crop&q=80&w=600" 
+              />
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <input 
-              type="checkbox" 
-              id="stay-logged"
-              className="w-5 h-5 rounded border-white/10 bg-white/5 checked:bg-primary transition-all cursor-pointer"
-            />
-            <label htmlFor="stay-logged" className="text-sm text-on-surface-variant cursor-pointer">
-              Stay logged in for 30 days
-            </label>
+          {/* Right Side: Sign In Form */}
+          <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-surface-container-lowest">
+            <div className="mb-10 text-center lg:text-left">
+              <h2 className="text-3xl font-display font-bold tracking-tight text-on-surface mb-2">Welcome Back</h2>
+              <p className="text-on-surface-variant font-sans text-sm">Sign in to access your digital lookbook and AR tools.</p>
+            </div>
+            
+            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); onComplete(); }}>
+              <div className="space-y-2">
+                <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-on-surface-variant px-1">Email Address</label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline">
+                    <span className="material-symbols-outlined text-[20px]">mail</span>
+                  </div>
+                  <input 
+                    className="w-full bg-surface-container-low border-b-2 border-secondary-container text-on-surface py-4 pl-12 pr-4 focus:outline-none focus:border-primary transition-all duration-300 rounded-t-xl placeholder:text-outline/50 font-sans" 
+                    placeholder="name@example.com" 
+                    type="email" 
+                    required 
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-2 px-1">
+                  <label className="block text-[10px] font-sans font-bold uppercase tracking-widest text-on-surface-variant">Password</label>
+                  <button type="button" className="text-[10px] uppercase font-bold tracking-tighter text-primary hover:text-primary-container transition-colors font-sans">Forgot password?</button>
+                </div>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline">
+                    <span className="material-symbols-outlined text-[20px]">lock</span>
+                  </div>
+                  <input 
+                    className="w-full bg-surface-container-low border-b-2 border-secondary-container text-on-surface py-4 pl-12 pr-12 rounded-t-xl placeholder:text-outline/50 focus:outline-none focus:border-primary transition-all duration-300 font-sans" 
+                    placeholder="••••••••" 
+                    type={showPassword ? "text" : "password"} 
+                    required 
+                  />
+                  <button 
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-outline hover:text-primary transition-colors" 
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    <span className="material-symbols-outlined text-[20px]">{showPassword ? 'visibility_off' : 'visibility'}</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-3 py-2">
+                <input 
+                  className="w-4 h-4 rounded-sm bg-surface-container-low border-outline-variant text-primary focus:ring-primary cursor-pointer" 
+                  id="remember" 
+                  type="checkbox" 
+                />
+                <label className="text-sm text-on-surface-variant cursor-pointer font-sans" htmlFor="remember">Stay logged in for 30 days</label>
+              </div>
+
+              <button 
+                className="w-full bg-primary-container text-on-primary-container font-display font-bold py-5 rounded-xl shadow-lg hover:brightness-110 active:scale-[0.98] transition-all duration-300 mt-4 flex items-center justify-center gap-2 uppercase tracking-widest text-[10px]" 
+                type="submit"
+              >
+                Sign In
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </form>
+
+            <div className="mt-8 pt-8 border-t border-outline-variant/30 text-center font-sans">
+              <p className="text-sm text-on-surface-variant">
+                Don't have an account? 
+                <button onClick={onSignUp} className="text-primary font-bold hover:underline underline-offset-4 ml-1">Sign up</button>
+              </p>
+            </div>
           </div>
-
-          <button type="submit" className="w-full btn-gradient py-5 opacity-80 hover:opacity-100 transition-opacity">
-            SIGN IN
-          </button>
-
-          <div className="pt-4 border-t border-white/5 text-center">
-            <p className="text-sm text-on-surface-variant">
-              Don't have an account? <button type="button" onClick={onSignUp} className="text-on-surface font-bold hover:text-primary transition-colors">Sign up</button>
-            </p>
-          </div>
-        </form>
-      </div>
-
-      {/* Bottom Visuals */}
-      <div className="mt-12 flex gap-6 opacity-40">
-        <div className="w-40 aspect-square rounded-2xl overflow-hidden border border-white/10">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" alt="Style 1" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
         </div>
-        <div className="w-40 aspect-square rounded-2xl overflow-hidden border border-white/10">
-          <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&q=80&w=300" alt="Style 2" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-        </div>
-      </div>
+      </main>
 
-      <div className="mt-16 w-full max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6 opacity-20">
-        <div className="text-[10px] font-bold uppercase tracking-widest">
-          © 2026 CROWNCHECK AI. ALL RIGHTS RESERVED.
-        </div>
-        <div className="flex gap-8">
-          {["Privacy Policy", "Terms of Service", "Contact Support"].map((link) => (
-            <a key={link} href="#" className="text-[10px] font-bold uppercase tracking-widest hover:text-primary transition-colors">
-              {link}
-            </a>
+      <footer className="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center bg-surface-container-lowest border-t border-outline/10 z-10 font-sans">
+        <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-outline">© 2026 CrownCheck AI. All Rights Reserved.</p>
+        <div className="flex gap-8 mt-6 md:mt-0 font-sans">
+          {["Privacy Policy", "Terms of Service", "Contact Support"].map(link => (
+            <button key={link} className="text-[10px] font-bold uppercase tracking-[0.1em] text-outline hover:text-primary transition-colors duration-200">{link}</button>
           ))}
         </div>
-      </div>
+      </footer>
     </motion.div>
   );
 }
-

@@ -22,6 +22,7 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.backgroundColor = theme === "dark" ? "#1c1018" : "#fff8f9";
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
@@ -52,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface selection:bg-primary/30 transition-colors duration-300">
+    <div className="min-h-screen selection:bg-primary/30 transition-colors duration-300" style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-on-surface)' }}>
       <AnimatePresence mode="wait">
         {view === "landing" ? (
           <LandingView
