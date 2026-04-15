@@ -27,11 +27,13 @@ import {
   ArrowRight
 } from "lucide-react";
 
-type View = "landing" | "signup" | "signin";
+type View = "landing" | "signup" | "signin" | "mirror" | "lookbook" | "consultants";
 
 export default function App() {
   const [view, setView] = useState<View>("landing");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [redirectView, setRedirectView] = useState<View | null>(null);
 
   useEffect(() => {
     if (theme === "light") {
@@ -43,6 +45,31 @@ export default function App() {
 
   const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
 
+  const handleProtectedNavigation = (targetView: View) => {
+    const protectedViews: View[] = ["mirror", "lookbook", "consultants"];
+    if (protectedViews.includes(targetView) && !isLoggedIn) {
+      setRedirectView(targetView);
+      setView("signin");
+    } else {
+      setView(targetView);
+    }
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    if (redirectView) {
+      setView(redirectView);
+      setRedirectView(null);
+    } else {
+      setView("mirror");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setView("landing");
+  };
+
   return (
     <div className="min-h-screen bg-surface text-on-surface selection:bg-primary/30 transition-colors duration-300">
       <AnimatePresence mode="wait">
@@ -50,6 +77,9 @@ export default function App() {
           <LandingView 
             onStart={() => setView("signup")} 
             onSignIn={() => setView("signin")} 
+            onNavigate={handleProtectedNavigation}
+            isLoggedIn={isLoggedIn}
+            onLogout={handleLogout}
             theme={theme}
             toggleTheme={toggleTheme}
           />
@@ -57,13 +87,30 @@ export default function App() {
           <SignupView 
             onBack={() => setView("landing")} 
             onSignIn={() => setView("signin")} 
+            onComplete={handleLogin}
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
+        ) : view === "signin" ? (
+          <SigninView 
+            onBack={() => setView("landing")} 
+            onSignUp={() => setView("signup")} 
+            onComplete={handleLogin}
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
+        ) : view === "mirror" ? (
+          <MirrorView 
+            onBack={() => setView("landing")}
+            onNavigate={handleProtectedNavigation}
+            onLogout={handleLogout}
             theme={theme}
             toggleTheme={toggleTheme}
           />
         ) : (
-          <SigninView 
-            onBack={() => setView("landing")} 
-            onSignUp={() => setView("signup")} 
+          <PlaceholderView 
+            title={view.charAt(0).toUpperCase() + view.slice(1)} 
+            onBack={() => setView("landing")}
             theme={theme}
             toggleTheme={toggleTheme}
           />
@@ -76,11 +123,17 @@ export default function App() {
 function LandingView({ 
   onStart, 
   onSignIn, 
+  onNavigate,
+  isLoggedIn,
+  onLogout,
   theme, 
   toggleTheme 
 }: { 
   onStart: () => void; 
   onSignIn: () => void;
+  onNavigate: (view: View) => void;
+  isLoggedIn: boolean;
+  onLogout: () => void;
   theme: "dark" | "light";
   toggleTheme: () => void;
 }) {
@@ -101,15 +154,30 @@ function LandingView({
           <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         <div className="hidden md:flex gap-10 items-center">
-          {["Mirror", "Lookbook", "Consultants", "Pricing"].map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
-            >
-              {item}
-            </a>
-          ))}
+          <button 
+            onClick={() => onNavigate("mirror")}
+            className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
+          >
+            Mirror
+          </button>
+          <button 
+            onClick={() => onNavigate("lookbook")}
+            className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
+          >
+            Lookbook
+          </button>
+          <button 
+            onClick={() => onNavigate("consultants")}
+            className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
+          >
+            Consultants
+          </button>
+          <a
+            href="#"
+            className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
+          >
+            Pricing
+          </a>
         </div>
         <div className="flex items-center gap-6">
           <button 
@@ -121,18 +189,29 @@ function LandingView({
           <button className="text-on-surface/60 hover:text-on-surface transition-colors p-2 rounded-full hover:bg-on-surface/5">
             <Globe size={20} />
           </button>
-          <button 
-            onClick={onSignIn}
-            className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
-          >
-            Sign In
-          </button>
-          <button 
-            onClick={onStart}
-            className="text-xs font-bold uppercase tracking-widest px-6 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all"
-          >
-            Sign Up
-          </button>
+          {isLoggedIn ? (
+            <button 
+              onClick={onLogout}
+              className="text-xs font-bold uppercase tracking-widest px-6 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+            >
+              Log Out
+            </button>
+          ) : (
+            <>
+              <button 
+                onClick={onSignIn}
+                className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors"
+              >
+                Sign In
+              </button>
+              <button 
+                onClick={onStart}
+                className="text-xs font-bold uppercase tracking-widest px-6 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all"
+              >
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
       </nav>
 
@@ -358,7 +437,7 @@ function LandingView({
   );
 }
 
-function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => void; onSignIn: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
+function SignupView({ onBack, onSignIn, onComplete, theme, toggleTheme }: { onBack: () => void; onSignIn: () => void; onComplete: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
   return (
     <motion.div
       key="signup"
@@ -441,7 +520,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
             <p className="text-on-surface-variant">Begin your journey to refined precision.</p>
           </div>
 
-          <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); onComplete(); }}>
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Full Name</label>
@@ -449,6 +528,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
                   <User className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
                   <input 
                     type="text" 
+                    required
                     placeholder="Alexander Sterling"
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
                   />
@@ -461,6 +541,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
                   <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
                   <input 
                     type="email" 
+                    required
                     placeholder="alexander@crowncheck.ai"
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
                   />
@@ -474,6 +555,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
                     <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
                     <input 
                       type="password" 
+                      required
                       placeholder="••••••••"
                       className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
                     />
@@ -485,6 +567,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
                     <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
                     <input 
                       type="password" 
+                      required
                       placeholder="••••••••"
                       className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
                     />
@@ -497,6 +580,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
               <input 
                 type="checkbox" 
                 id="terms"
+                required
                 className="w-5 h-5 rounded border-white/10 bg-white/5 checked:bg-primary transition-all cursor-pointer"
               />
               <label htmlFor="terms" className="text-sm text-on-surface-variant cursor-pointer">
@@ -504,13 +588,13 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
               </label>
             </div>
 
-            <button className="w-full btn-gradient py-5 flex items-center justify-center gap-3 group">
+            <button type="submit" className="w-full btn-gradient py-5 flex items-center justify-center gap-3 group">
               Create Account <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
 
             <div className="text-center">
               <p className="text-sm text-on-surface-variant">
-                Already a member? <button onClick={onSignIn} className="text-on-surface font-bold hover:text-primary transition-colors">Sign In</button>
+                Already a member? <button type="button" onClick={onSignIn} className="text-on-surface font-bold hover:text-primary transition-colors">Sign In</button>
               </p>
             </div>
           </form>
@@ -533,7 +617,7 @@ function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => vo
   );
 }
 
-function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => void; onSignUp: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
+function SigninView({ onBack, onSignUp, onComplete, theme, toggleTheme }: { onBack: () => void; onSignUp: () => void; onComplete: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -567,7 +651,7 @@ function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => vo
         <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">The Ethereal Precision</p>
       </div>
 
-      <div className="w-full max-w-lg bg-surface-container-low rounded-[2.5rem] p-12 md:p-16 shadow-2xl border border-white/5 relative">
+      <div className="w-full max-lg bg-surface-container-low rounded-[2.5rem] p-12 md:p-16 shadow-2xl border border-white/5 relative">
         <div className="mb-12">
           <h2 className="headline-section text-4xl mb-4">Welcome Back</h2>
           <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -575,7 +659,7 @@ function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => vo
           </p>
         </div>
 
-        <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-8" onSubmit={(e) => { e.preventDefault(); onComplete(); }}>
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-1">Email Address</label>
@@ -583,6 +667,7 @@ function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => vo
                 <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
                 <input 
                   type="email" 
+                  required
                   placeholder="name@example.com"
                   className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
                 />
@@ -598,6 +683,7 @@ function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => vo
                 <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
                 <input 
                   type={showPassword ? "text" : "password"} 
+                  required
                   placeholder="••••••••"
                   className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-14 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
                 />
@@ -623,13 +709,13 @@ function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => vo
             </label>
           </div>
 
-          <button className="w-full btn-gradient py-5 opacity-80 hover:opacity-100 transition-opacity">
+          <button type="submit" className="w-full btn-gradient py-5 opacity-80 hover:opacity-100 transition-opacity">
             SIGN IN
           </button>
 
           <div className="pt-4 border-t border-white/5 text-center">
             <p className="text-sm text-on-surface-variant">
-              Don't have an account? <button onClick={onSignUp} className="text-on-surface font-bold hover:text-primary transition-colors">Sign up</button>
+              Don't have an account? <button type="button" onClick={onSignUp} className="text-on-surface font-bold hover:text-primary transition-colors">Sign up</button>
             </p>
           </div>
         </form>
@@ -657,6 +743,241 @@ function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => vo
           ))}
         </div>
       </div>
+    </motion.div>
+  );
+}
+
+function MirrorView({ onBack, onNavigate, onLogout, theme, toggleTheme }: { onBack: () => void; onNavigate: (view: View) => void; onLogout: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
+  const [activeCategory, setActiveCategory] = useState("ALL STYLES");
+  const [selectedStyle, setSelectedStyle] = useState("TEXTURED CROP");
+
+  const categories = ["ALL STYLES", "FADES", "BRAIDS", "LONG"];
+  const styles = [
+    { name: "MODERN BUZZ", image: "https://images.unsplash.com/photo-1599351431247-f10b21ce5602?auto=format&fit=crop&q=80&w=300" },
+    { name: "TEXTURED CROP", image: "https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=300" },
+    { name: "BOX BRAIDS", image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&q=80&w=300" },
+    { name: "TAPER POMPADOUR", image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80&w=300" },
+    { name: "WAVY FLOW", image: "https://images.unsplash.com/photo-1592647425550-8fe915cfa1f7?auto=format&fit=crop&q=80&w=300" },
+    { name: "BALD FADE", image: "https://images.unsplash.com/photo-1516914915600-240abe828880?auto=format&fit=crop&q=80&w=300" },
+  ];
+
+  return (
+    <motion.div
+      key="mirror"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen flex flex-col pt-24 pb-12 px-8 max-w-[1600px] mx-auto"
+    >
+      {/* Navigation Header */}
+      <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-surface/80 backdrop-blur-md border-b border-white/5">
+        <div 
+          className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer"
+          onClick={onBack}
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Scissors size={20} />
+          </div>
+          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
+        </div>
+        
+        <div className="hidden md:flex gap-10 items-center">
+          <button className="text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary pb-1">Mirror</button>
+          <button onClick={() => onNavigate("lookbook")} className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors">Lookbook</button>
+          <button onClick={() => onNavigate("consultants")} className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors">Consultants</button>
+          <button className="text-xs font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors">Pricing</button>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <button onClick={toggleTheme} className="text-on-surface/60 hover:text-primary transition-colors">
+            {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+          <button 
+            onClick={onLogout}
+            className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface/60 hover:text-primary transition-colors"
+          >
+            <User size={20} />
+          </button>
+        </div>
+      </nav>
+
+      <div className="mb-8">
+        <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-2">Augmented Reality Interface</div>
+        <h1 className="display-hero text-6xl md:text-7xl">The Mirror</h1>
+      </div>
+
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Main AR View */}
+        <div className="lg:col-span-9 relative rounded-[2.5rem] overflow-hidden bg-surface-container shadow-2xl border border-white/5">
+          {/* Mock Camera Feed */}
+          <div className="absolute inset-0">
+            <img 
+              src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1600" 
+              alt="Camera Feed"
+              className="w-full h-full object-cover brightness-75"
+              referrerPolicy="no-referrer"
+            />
+            {/* AR Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div 
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
+                className="w-80 h-80 border-2 border-primary/40 rounded-full flex items-center justify-center"
+              >
+                <div className="w-72 h-72 border border-primary/20 rounded-full" />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Camera Controls */}
+          <div className="absolute top-8 left-8 flex items-center gap-4">
+            <div className="badge bg-primary/20 text-primary border border-primary/30 flex items-center gap-2 py-2 px-4">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              Live AI Detection
+            </div>
+          </div>
+
+          <div className="absolute top-8 right-8">
+            <button className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-white hover:bg-primary transition-colors">
+              <Camera size={20} />
+            </button>
+          </div>
+
+          {/* Style Categories Overlay */}
+          <div className="absolute bottom-8 left-8 flex gap-3">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${
+                  activeCategory === cat 
+                    ? "bg-primary text-white shadow-lg shadow-primary/30" 
+                    : "glass-card text-white/60 hover:text-white"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Sidebar */}
+        <div className="lg:col-span-3 space-y-8">
+          {/* Detection Specs */}
+          <div className="bg-surface-container-low rounded-[2rem] p-8 border border-white/5">
+            <h3 className="text-primary font-bold text-lg mb-6">Detection Specs</h3>
+            <div className="space-y-6">
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-on-surface/40 mb-2">Face Shape</div>
+                <div className="text-xl font-bold">Strong Jawline / Oval</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-on-surface/40 mb-2">Hair Texture</div>
+                <div className="text-xl font-bold">Type 2C Wavy</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-on-surface/40 mb-2">Suggested Fade</div>
+                <div className="text-xl font-bold">Mid-Drop Fade</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Style Match Card */}
+          <div className="bg-surface-container-low rounded-[2rem] overflow-hidden border border-white/5 group">
+            <div className="aspect-square relative">
+              <img 
+                src="https://images.unsplash.com/photo-1599351431247-f10b21ce5602?auto=format&fit=crop&q=80&w=600" 
+                alt="Style Match"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">Top Consultant Choice</div>
+                <div className="text-2xl font-bold mb-4">The Executive Cut</div>
+                <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-on-surface/60 hover:text-primary transition-colors">
+                  View Full Lookbook <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Style Carousel */}
+      <div className="mt-12">
+        <div className="flex gap-6 overflow-x-auto pb-4 no-scrollbar">
+          {styles.map((style) => (
+            <button
+              key={style.name}
+              onClick={() => setSelectedStyle(style.name)}
+              className="flex-shrink-0 group"
+            >
+              <div className={`w-48 aspect-[3/4] rounded-2xl overflow-hidden mb-4 border-2 transition-all ${
+                selectedStyle === style.name ? "border-primary scale-105 shadow-xl shadow-primary/20" : "border-transparent opacity-60 grayscale hover:opacity-100 hover:grayscale-0"
+              }`}>
+                <img src={style.image} alt={style.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              </div>
+              <div className={`text-[10px] font-bold uppercase tracking-widest text-center transition-colors ${
+                selectedStyle === style.name ? "text-primary" : "text-on-surface/40"
+              }`}>
+                {style.name}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-12 pt-8 border-t border-white/5 flex justify-between items-center opacity-40">
+        <div className="text-[10px] font-bold uppercase tracking-widest">© 2024 CROWNCHECK AI. ALL RIGHTS RESERVED.</div>
+        <div className="flex gap-8">
+          {["Privacy Policy", "Terms of Service", "Contact Support"].map(link => (
+            <button key={link} className="text-[10px] font-bold uppercase tracking-widest hover:text-primary transition-colors">{link}</button>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function PlaceholderView({ title, onBack, theme, toggleTheme }: { title: string; onBack: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
+  return (
+    <motion.div
+      key="placeholder"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="min-h-screen flex flex-col items-center justify-center p-8 relative overflow-hidden"
+    >
+      {/* Theme Toggle */}
+      <div className="absolute top-8 right-8 z-50">
+        <button 
+          onClick={toggleTheme}
+          className="text-on-surface/60 hover:text-primary transition-colors p-2 rounded-full hover:bg-on-surface/5"
+        >
+          {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+        </button>
+      </div>
+      
+      <div className="text-center max-w-2xl">
+        <div className="font-display font-extrabold text-5xl tracking-tighter mb-8 flex items-center justify-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-2xl shadow-primary/20">
+            <Scissors size={32} />
+          </div>
+          <span>{title}</span>
+        </div>
+        <h2 className="headline-section mb-6">Coming Soon</h2>
+        <p className="text-on-surface-variant text-lg leading-relaxed mb-12">
+          We're currently refining the {title} experience to meet our standards of ethereal precision. 
+          Check back soon for the full reveal.
+        </p>
+        <button onClick={onBack} className="btn-outline flex items-center gap-3 mx-auto">
+          <ChevronLeft size={20} /> Back to Landing
+        </button>
+      </div>
+
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[100px] rounded-full -z-10" />
     </motion.div>
   );
 }
