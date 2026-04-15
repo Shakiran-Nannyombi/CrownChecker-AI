@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 
 export default function ConsultantsView({ onBack, onNavigate, onLogout, theme, toggleTheme }: { onBack: () => void; onNavigate: (view: View) => void; onLogout: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
@@ -46,10 +47,10 @@ export default function ConsultantsView({ onBack, onNavigate, onLogout, theme, t
           className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer"
           onClick={onBack}
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Scissors size={20} />
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Logo size={20} />
           </div>
-          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
+          <span className="bg-linear-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         
         <div className="hidden md:flex gap-10 items-center">
@@ -120,14 +121,14 @@ export default function ConsultantsView({ onBack, onNavigate, onLogout, theme, t
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
         {/* Featured Consultant */}
-        <div className="lg:col-span-8 relative rounded-[2.5rem] overflow-hidden bg-surface-container border border-white/5 group aspect-[16/9]">
+        <div className="lg:col-span-8 relative rounded-[2.5rem] overflow-hidden bg-surface-container border border-white/5 group aspect-video">
           <img 
             src={consultants[0].image} 
             alt={consultants[0].name}
             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent" />
           
           <div className="absolute bottom-12 left-12 right-12">
             <div className="flex items-center gap-2 text-primary mb-2">
@@ -193,7 +194,7 @@ export default function ConsultantsView({ onBack, onNavigate, onLogout, theme, t
 
       {/* Secondary Row */}
       <div className="bg-surface-container-low rounded-[2.5rem] p-12 border border-white/5 flex flex-col md:flex-row items-center gap-12 mb-16">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20 flex-shrink-0">
+        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/20 shrink-0">
           <img 
             src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=300" 
             alt="Sasha Vane"
@@ -254,7 +255,7 @@ export default function ConsultantsView({ onBack, onNavigate, onLogout, theme, t
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
-          <div className="absolute inset-0 bg-gradient-to-r from-surface-container to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-surface-container to-transparent" />
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 
 export default function SignupView({ onBack, onSignIn, onComplete, theme, toggleTheme }: { onBack: () => void; onSignIn: () => void; onComplete: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
@@ -57,7 +58,7 @@ export default function SignupView({ onBack, onSignIn, onComplete, theme, toggle
               </div>
               <div className="flex gap-4">
                 <div className="text-primary mt-1">
-                  <Scissors size={24} />
+                  <Logo size={24} />
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-1">Precision Matching</h4>
@@ -71,7 +72,7 @@ export default function SignupView({ onBack, onSignIn, onComplete, theme, toggle
 
           {/* Stylized Portrait Image */}
           <div className="absolute bottom-0 right-0 w-full h-2/3 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/40 to-transparent z-10" />
+            <div className="absolute inset-0 bg-linear-to-t from-surface-container via-surface-container/40 to-transparent z-10" />
             <img 
               src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=800" 
               alt="Stylized Portrait"
@@ -98,7 +99,7 @@ export default function SignupView({ onBack, onSignIn, onComplete, theme, toggle
                     type="text" 
                     required
                     placeholder="Alexander Sterling"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
                   />
                 </div>
               </div>
@@ -111,7 +112,7 @@ export default function SignupView({ onBack, onSignIn, onComplete, theme, toggle
                     type="email" 
                     required
                     placeholder="alexander@crowncheck.ai"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
                   />
                 </div>
               </div>
@@ -125,7 +126,7 @@ export default function SignupView({ onBack, onSignIn, onComplete, theme, toggle
                       type="password" 
                       required
                       placeholder="••••••••"
-                      className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
                     />
                   </div>
                 </div>
@@ -137,7 +138,7 @@ export default function SignupView({ onBack, onSignIn, onComplete, theme, toggle
                       type="password" 
                       required
                       placeholder="••••••••"
-                      className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
                     />
                   </div>
                 </div>

@@ -21,11 +21,7 @@ export default function App() {
   const [redirectView, setRedirectView] = useState<View | null>(null);
 
   useEffect(() => {
-    if (theme === "light") {
-      document.documentElement.classList.add("light");
-    } else {
-      document.documentElement.classList.remove("light");
-    }
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
@@ -59,9 +55,9 @@ export default function App() {
     <div className="min-h-screen bg-surface text-on-surface selection:bg-primary/30 transition-colors duration-300">
       <AnimatePresence mode="wait">
         {view === "landing" ? (
-          <LandingView 
-            onStart={() => setView("signup")} 
-            onSignIn={() => setView("signin")} 
+          <LandingView
+            onStart={() => setView("signup")}
+            onSignIn={() => setView("signin")}
             onNavigate={handleProtectedNavigation}
             isLoggedIn={isLoggedIn}
             onLogout={handleLogout}
@@ -69,23 +65,23 @@ export default function App() {
             toggleTheme={toggleTheme}
           />
         ) : view === "signup" ? (
-          <SignupView 
-            onBack={() => setView("landing")} 
-            onSignIn={() => setView("signin")} 
+          <SignupView
+            onBack={() => setView("landing")}
+            onSignIn={() => setView("signin")}
             onComplete={handleLogin}
             theme={theme}
             toggleTheme={toggleTheme}
           />
         ) : view === "signin" ? (
-          <SigninView 
-            onBack={() => setView("landing")} 
-            onSignUp={() => setView("signup")} 
+          <SigninView
+            onBack={() => setView("landing")}
+            onSignUp={() => setView("signup")}
             onComplete={handleLogin}
             theme={theme}
             toggleTheme={toggleTheme}
           />
         ) : view === "mirror" ? (
-          <MirrorView 
+          <MirrorView
             onBack={() => setView("landing")}
             onNavigate={handleProtectedNavigation}
             onLogout={handleLogout}
@@ -93,7 +89,7 @@ export default function App() {
             toggleTheme={toggleTheme}
           />
         ) : view === "lookbook" ? (
-          <LookbookView 
+          <LookbookView
             onBack={() => setView("landing")}
             onNavigate={handleProtectedNavigation}
             onLogout={handleLogout}
@@ -101,7 +97,7 @@ export default function App() {
             toggleTheme={toggleTheme}
           />
         ) : view === "consultants" ? (
-          <ConsultantsView 
+          <ConsultantsView
             onBack={() => setView("landing")}
             onNavigate={handleProtectedNavigation}
             onLogout={handleLogout}
@@ -109,7 +105,7 @@ export default function App() {
             toggleTheme={toggleTheme}
           />
         ) : view === "pricing" ? (
-          <PricingView 
+          <PricingView
             onBack={() => setView("landing")}
             onNavigate={handleProtectedNavigation}
             onLogout={handleLogout}
@@ -117,8 +113,8 @@ export default function App() {
             toggleTheme={toggleTheme}
           />
         ) : (
-          <PlaceholderView 
-            title={view.charAt(0).toUpperCase() + view.slice(1)} 
+          <PlaceholderView
+            title={view.charAt(0).toUpperCase() + view.slice(1)}
             onBack={() => setView("landing")}
             theme={theme}
             toggleTheme={toggleTheme}

@@ -77,18 +77,18 @@
   }
 
   .glass-card {
-    @apply bg-on-surface/[0.05] backdrop-blur-xl border border-on-surface/[0.1];
+    @apply bg-on-surface/5 backdrop-blur-xl border border-on-surface/10;
   }
 
   .btn-gradient {
-    @apply px-8 py-4 rounded-lg bg-gradient-to-r from-[#D988B9] to-[#623253] text-white font-bold transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary/20;
+    @apply px-8 py-4 rounded-lg bg-linear-to-r from-primary to-primary-dark text-white font-bold transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary/20;
   }
 
   .btn-outline {
-    @apply px-8 py-4 rounded-lg bg-on-surface/[0.05] border border-on-surface/[0.1] text-on-surface font-bold transition-all hover:bg-on-surface/[0.1];
+    @apply px-8 py-4 rounded-lg bg-on-surface/5 border border-on-surface/10 text-on-surface font-bold transition-all hover:bg-on-surface/10;
   }
 
   .badge {
-    @apply px-3 py-1 rounded-full bg-on-surface/[0.1] text-[10px] font-bold uppercase tracking-widest text-on-surface/60;
+    @apply px-3 py-1 rounded-full bg-on-surface/10 text-[10px] font-bold uppercase tracking-widest text-on-surface/60;
   }
 }

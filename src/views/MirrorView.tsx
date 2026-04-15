@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 
 export default function MirrorView({ onBack, onNavigate, onLogout, theme, toggleTheme }: { onBack: () => void; onNavigate: (view: View) => void; onLogout: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
@@ -33,10 +34,10 @@ export default function MirrorView({ onBack, onNavigate, onLogout, theme, toggle
           className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer"
           onClick={onBack}
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Scissors size={20} />
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Logo size={20} />
           </div>
-          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
+          <span className="bg-linear-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         
         <div className="hidden md:flex gap-10 items-center">
@@ -150,7 +151,7 @@ export default function MirrorView({ onBack, onNavigate, onLogout, theme, toggle
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-surface-container-low via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">Top Consultant Choice</div>
                 <div className="text-2xl font-bold mb-4">The Executive Cut</div>
@@ -170,9 +171,9 @@ export default function MirrorView({ onBack, onNavigate, onLogout, theme, toggle
             <button
               key={style.name}
               onClick={() => setSelectedStyle(style.name)}
-              className="flex-shrink-0 group"
+              className="shrink-0 group"
             >
-              <div className={`w-48 aspect-[3/4] rounded-2xl overflow-hidden mb-4 border-2 transition-all ${
+              <div className={`w-48 aspect-3/4 rounded-2xl overflow-hidden mb-4 border-2 transition-all ${
                 selectedStyle === style.name ? "border-primary scale-105 shadow-xl shadow-primary/20" : "border-transparent opacity-60 grayscale hover:opacity-100 hover:grayscale-0"
               }`}>
                 <img src={style.image} alt={style.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />

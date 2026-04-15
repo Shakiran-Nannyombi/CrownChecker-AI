@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 
 export default function PlaceholderView({ title, onBack, theme, toggleTheme }: { title: string; onBack: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
@@ -26,8 +27,8 @@ export default function PlaceholderView({ title, onBack, theme, toggleTheme }: {
       
       <div className="text-center max-w-2xl">
         <div className="font-display font-extrabold text-5xl tracking-tighter mb-8 flex items-center justify-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-2xl shadow-primary/20">
-            <Scissors size={32} />
+          <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-2xl shadow-primary/20">
+            <Logo size={32} />
           </div>
           <span>{title}</span>
         </div>

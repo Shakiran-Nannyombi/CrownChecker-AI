@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 import LookCard from "../components/LookCard";
 
@@ -63,10 +64,10 @@ export default function LookbookView({ onBack, onNavigate, onLogout, theme, togg
           className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer"
           onClick={onBack}
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Scissors size={20} />
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Logo size={20} />
           </div>
-          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
+          <span className="bg-linear-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         
         <div className="hidden md:flex gap-10 items-center">

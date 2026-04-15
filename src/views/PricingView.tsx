@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 
 export default function PricingView({ onBack, onNavigate, onLogout, theme, toggleTheme }: { onBack: () => void; onNavigate: (view: View) => void; onLogout: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
@@ -48,10 +49,10 @@ export default function PricingView({ onBack, onNavigate, onLogout, theme, toggl
           className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer"
           onClick={onBack}
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Scissors size={20} />
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Logo size={20} />
           </div>
-          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
+          <span className="bg-linear-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         
         <div className="hidden md:flex gap-10 items-center">
@@ -84,14 +85,14 @@ export default function PricingView({ onBack, onNavigate, onLogout, theme, toggl
             The CrownCheck Prism experience combines cutting-edge AR synthesis with world-class editorial styling. Choose the tier that defines your vision.
           </p>
         </div>
-        <div className="relative rounded-[3rem] overflow-hidden aspect-square lg:aspect-[4/5] group">
+        <div className="relative rounded-[3rem] overflow-hidden aspect-square lg:aspect-4/5 group">
           <img 
             src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=1000" 
             alt="Editorial Identity"
             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 grayscale"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-linear-to-t from-surface via-transparent to-transparent opacity-60" />
         </div>
       </div>
 
@@ -102,7 +103,7 @@ export default function PricingView({ onBack, onNavigate, onLogout, theme, toggl
             key={tier.name}
             className={`relative rounded-[2.5rem] p-12 flex flex-col border transition-all duration-500 ${
               tier.featured 
-                ? "bg-gradient-to-br from-primary/20 via-primary/5 to-transparent border-primary/30 shadow-2xl shadow-primary/10 scale-105 z-10" 
+                ? "bg-linear-to-br from-primary/20 via-primary/5 to-transparent border-primary/30 shadow-2xl shadow-primary/10 scale-105 z-10" 
                 : "bg-surface-container-low border-white/5 hover:border-white/10"
             }`}
           >
@@ -124,7 +125,7 @@ export default function PricingView({ onBack, onNavigate, onLogout, theme, toggl
             <ul className="space-y-6 mb-12 flex-1">
               {tier.features.map((feature, i) => (
                 <li key={i} className="flex items-center gap-4 text-sm text-on-surface-variant">
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${tier.featured ? 'bg-primary/20 text-primary' : 'bg-white/5 text-on-surface/40'}`}>
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${tier.featured ? 'bg-primary/20 text-primary' : 'bg-white/5 text-on-surface/40'}`}>
                     {tier.featured ? <Sparkles size={12} /> : <CheckCircle size={12} />}
                   </div>
                   {feature}

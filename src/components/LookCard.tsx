@@ -6,14 +6,14 @@ import {
 
 export default function LookCard({ look, featured = false }: { look: any; featured?: boolean }) {
   return (
-    <div className={`group relative rounded-[2rem] overflow-hidden bg-surface-container border border-white/5 ${featured ? 'aspect-[16/10]' : 'aspect-square'}`}>
+    <div className={`group relative rounded-[2rem] overflow-hidden bg-surface-container border border-white/5 ${featured ? 'aspect-16/10' : 'aspect-square'}`}>
       <img 
         src={look.image} 
         alt={look.title}
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         referrerPolicy="no-referrer"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
       
       <div className="absolute top-6 right-6">
         <div className="glass-card px-4 py-2 rounded-xl border border-white/10 flex flex-col items-center">

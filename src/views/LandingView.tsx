@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, Sparkles, ChevronRight, ChevronLeft, Moon, Sun, Globe, Target, Eye, EyeOff, Smartphone, BarChart3, LayoutGrid, Users, User, Mail, Lock, Scissors, ArrowRight, Heart, Box, Search, CheckCircle, Filter, Award, Star, CreditCard, Zap
 } from "lucide-react";
+import Logo from "../components/Logo";
 import { View } from "../types";
 import Footer from "../components/Footer";
 
@@ -34,10 +35,10 @@ export default function LandingView({
       {/* Navigation */}
       <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-surface/80 backdrop-blur-md">
         <div className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            <Scissors size={20} />
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Logo size={20} />
           </div>
-          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
+          <span className="bg-linear-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         <div className="hidden md:flex gap-10 items-center">
           <button 
@@ -131,7 +132,7 @@ export default function LandingView({
             transition={{ duration: 1, delay: 0.2 }}
             className="relative"
           >
-            <div className="rounded-3xl overflow-hidden aspect-[4/5] relative bg-surface-container shadow-2xl">
+            <div className="rounded-3xl overflow-hidden aspect-4/5 relative bg-surface-container shadow-2xl">
               <img 
                 src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1000" 
                 alt="AI Hairstyle Visualization"
@@ -214,7 +215,7 @@ export default function LandingView({
                   stable, zero-latency experience.
                 </p>
               </div>
-              <div className="absolute right-0 bottom-0 translate-y-1/4 translate-x-1/4 w-2/3 aspect-[9/19] bg-surface-container-high rounded-t-[3rem] border-x-8 border-t-8 border-surface-container-highest shadow-2xl overflow-hidden">
+              <div className="absolute right-0 bottom-0 translate-y-1/4 translate-x-1/4 w-2/3 aspect-9/19 bg-surface-container-high rounded-t-[3rem] border-x-8 border-t-8 border-surface-container-highest shadow-2xl overflow-hidden">
                  <img 
                   src="https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=600" 
                   alt="Phone Mockup"
@@ -245,7 +246,7 @@ export default function LandingView({
                     initial={{ width: 0 }}
                     whileInView={{ width: "92%" }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-primary to-primary-dark"
+                    className="h-full bg-linear-to-r from-primary to-primary-dark"
                   />
                 </div>
               </div>
@@ -302,7 +303,7 @@ export default function LandingView({
 
         {/* CTA Section */}
         <section className="py-32 px-8">
-          <div className="max-w-7xl mx-auto rounded-[3rem] bg-gradient-to-br from-primary/20 to-primary-dark/20 p-24 text-center relative overflow-hidden">
+          <div className="max-w-7xl mx-auto rounded-[3rem] bg-linear-to-br from-primary/20 to-primary-dark/20 p-24 text-center relative overflow-hidden">
             <div className="relative z-10">
               <h2 className="headline-section mb-8">Ready to redefine <br />your reflection?</h2>
               <p className="text-on-surface-variant max-w-xl mx-auto mb-12 text-lg">

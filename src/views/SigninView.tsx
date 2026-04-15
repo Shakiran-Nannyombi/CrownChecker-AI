@@ -57,7 +57,7 @@ export default function SigninView({ onBack, onSignUp, onComplete, theme, toggle
                   type="email" 
                   required
                   placeholder="name@example.com"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-6 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
                 />
               </div>
             </div>
@@ -73,7 +73,7 @@ export default function SigninView({ onBack, onSignUp, onComplete, theme, toggle
                   type={showPassword ? "text" : "password"} 
                   required
                   placeholder="••••••••"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-14 focus:border-primary focus:bg-white/[0.08] outline-none transition-all placeholder:text-white/10"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-14 pr-14 focus:border-primary focus:bg-white/8 outline-none transition-all placeholder:text-white/10"
                 />
                 <button 
                   type="button"
