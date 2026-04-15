@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   Camera, 
@@ -11,6 +11,7 @@ import {
   ChevronRight, 
   ChevronLeft,
   Moon, 
+  Sun,
   Globe, 
   Target, 
   Eye, 
@@ -30,23 +31,59 @@ type View = "landing" | "signup" | "signin";
 
 export default function App() {
   const [view, setView] = useState<View>("landing");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface selection:bg-primary/30">
+    <div className="min-h-screen bg-surface text-on-surface selection:bg-primary/30 transition-colors duration-300">
       <AnimatePresence mode="wait">
         {view === "landing" ? (
-          <LandingView onStart={() => setView("signup")} onSignIn={() => setView("signin")} />
+          <LandingView 
+            onStart={() => setView("signup")} 
+            onSignIn={() => setView("signin")} 
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
         ) : view === "signup" ? (
-          <SignupView onBack={() => setView("landing")} onSignIn={() => setView("signin")} />
+          <SignupView 
+            onBack={() => setView("landing")} 
+            onSignIn={() => setView("signin")} 
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
         ) : (
-          <SigninView onBack={() => setView("landing")} onSignUp={() => setView("signup")} />
+          <SigninView 
+            onBack={() => setView("landing")} 
+            onSignUp={() => setView("signup")} 
+            theme={theme}
+            toggleTheme={toggleTheme}
+          />
         )}
       </AnimatePresence>
     </div>
   );
 }
 
-function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () => void }) {
+function LandingView({ 
+  onStart, 
+  onSignIn, 
+  theme, 
+  toggleTheme 
+}: { 
+  onStart: () => void; 
+  onSignIn: () => void;
+  theme: "dark" | "light";
+  toggleTheme: () => void;
+}) {
   return (
     <motion.div
       key="landing"
@@ -57,8 +94,11 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
     >
       {/* Navigation */}
       <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-surface/80 backdrop-blur-md">
-        <div className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-1">
-          <span className="bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">CrownCheck AI</span>
+        <div className="font-display font-extrabold text-2xl tracking-tighter flex items-center gap-2 group cursor-pointer">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
+            <Scissors size={20} />
+          </div>
+          <span className="bg-gradient-to-r from-on-surface to-on-surface/70 bg-clip-text text-transparent">CrownCheck <span className="text-primary">AI</span></span>
         </div>
         <div className="hidden md:flex gap-10 items-center">
           {["Mirror", "Lookbook", "Consultants", "Pricing"].map((item) => (
@@ -72,10 +112,13 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
           ))}
         </div>
         <div className="flex items-center gap-6">
-          <button className="text-on-surface/60 hover:text-on-surface transition-colors">
-            <Moon size={20} />
+          <button 
+            onClick={toggleTheme}
+            className="text-on-surface/60 hover:text-primary transition-colors p-2 rounded-full hover:bg-on-surface/5"
+          >
+            {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
-          <button className="text-on-surface/60 hover:text-on-surface transition-colors">
+          <button className="text-on-surface/60 hover:text-on-surface transition-colors p-2 rounded-full hover:bg-on-surface/5">
             <Globe size={20} />
           </button>
           <button 
@@ -123,11 +166,11 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
             transition={{ duration: 1, delay: 0.2 }}
             className="relative"
           >
-            <div className="rounded-3xl overflow-hidden aspect-[4/5] relative">
+            <div className="rounded-3xl overflow-hidden aspect-[4/5] relative bg-surface-container shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1620331311520-246422ff82f9?auto=format&fit=crop&q=80&w=1000" 
+                src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1000" 
                 alt="AI Hairstyle Visualization"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-8 left-8 right-8 glass-card p-6 rounded-2xl flex items-center gap-4">
@@ -208,7 +251,7 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
               </div>
               <div className="absolute right-0 bottom-0 translate-y-1/4 translate-x-1/4 w-2/3 aspect-[9/19] bg-surface-container-high rounded-t-[3rem] border-x-8 border-t-8 border-surface-container-highest shadow-2xl overflow-hidden">
                  <img 
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&q=80&w=600" 
+                  src="https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=600" 
                   alt="Phone Mockup"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -253,12 +296,16 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
                 world-class barbers and digital stylists.
               </p>
               <div className="flex -space-x-4">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-surface-container-low overflow-hidden">
-                    <img src={`https://picsum.photos/seed/hair${i}/100/100`} alt="Style" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                {[
+                  "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80&w=100",
+                  "https://images.unsplash.com/photo-1592647425550-8fe915cfa1f7?auto=format&fit=crop&q=80&w=100",
+                  "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&q=80&w=100"
+                ].map((src, i) => (
+                  <div key={i} className="w-12 h-12 rounded-full border-4 border-surface-container-low overflow-hidden bg-surface-container">
+                    <img src={src} alt="Style" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </div>
                 ))}
-                <div className="w-12 h-12 rounded-full border-4 border-surface-container-low bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-white/40">
+                <div className="w-12 h-12 rounded-full border-4 border-surface-container-low bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface/40">
                   +500
                 </div>
               </div>
@@ -276,9 +323,9 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
                   world.
                 </p>
               </div>
-              <div className="hidden lg:block w-64 aspect-square rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+              <div className="hidden lg:block w-64 aspect-square rounded-2xl overflow-hidden group-hover:scale-105 transition-transform duration-500 shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=600" 
+                  src="https://images.unsplash.com/photo-1516914915600-240abe828880?auto=format&fit=crop&q=80&w=600" 
                   alt="Barber"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -311,7 +358,7 @@ function LandingView({ onStart, onSignIn }: { onStart: () => void; onSignIn: () 
   );
 }
 
-function SignupView({ onBack, onSignIn }: { onBack: () => void; onSignIn: () => void }) {
+function SignupView({ onBack, onSignIn, theme, toggleTheme }: { onBack: () => void; onSignIn: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
   return (
     <motion.div
       key="signup"
@@ -321,6 +368,15 @@ function SignupView({ onBack, onSignIn }: { onBack: () => void; onSignIn: () => 
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="min-h-screen flex flex-col items-center justify-center p-8 relative overflow-hidden"
     >
+      {/* Theme Toggle */}
+      <div className="absolute top-8 right-8 z-50">
+        <button 
+          onClick={toggleTheme}
+          className="text-on-surface/60 hover:text-primary transition-colors p-2 rounded-full hover:bg-on-surface/5"
+        >
+          {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+        </button>
+      </div>
       {/* Background Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-primary/10 blur-[150px] rounded-full -z-10" />
 
@@ -372,7 +428,7 @@ function SignupView({ onBack, onSignIn }: { onBack: () => void; onSignIn: () => 
             <img 
               src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=800" 
               alt="Stylized Portrait"
-              className="w-full h-full object-cover object-top opacity-40 grayscale"
+              className="w-full h-full object-cover object-top opacity-40"
               referrerPolicy="no-referrer"
             />
           </div>
@@ -477,7 +533,7 @@ function SignupView({ onBack, onSignIn }: { onBack: () => void; onSignIn: () => 
   );
 }
 
-function SigninView({ onBack, onSignUp }: { onBack: () => void; onSignUp: () => void }) {
+function SigninView({ onBack, onSignUp, theme, toggleTheme }: { onBack: () => void; onSignUp: () => void; theme: "dark" | "light"; toggleTheme: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -489,6 +545,15 @@ function SigninView({ onBack, onSignUp }: { onBack: () => void; onSignUp: () => 
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="min-h-screen flex flex-col items-center justify-center p-8 relative overflow-hidden"
     >
+      {/* Theme Toggle */}
+      <div className="absolute top-8 right-8 z-50">
+        <button 
+          onClick={toggleTheme}
+          className="text-on-surface/60 hover:text-primary transition-colors p-2 rounded-full hover:bg-on-surface/5"
+        >
+          {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+        </button>
+      </div>
       {/* Background Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full -z-10" />
 
@@ -572,10 +637,10 @@ function SigninView({ onBack, onSignUp }: { onBack: () => void; onSignUp: () => 
 
       {/* Bottom Visuals */}
       <div className="mt-12 flex gap-6 opacity-40">
-        <div className="w-40 aspect-square rounded-2xl overflow-hidden grayscale border border-white/10">
+        <div className="w-40 aspect-square rounded-2xl overflow-hidden border border-white/10">
           <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" alt="Style 1" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
         </div>
-        <div className="w-40 aspect-square rounded-2xl overflow-hidden grayscale border border-white/10">
+        <div className="w-40 aspect-square rounded-2xl overflow-hidden border border-white/10">
           <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&q=80&w=300" alt="Style 2" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
         </div>
       </div>

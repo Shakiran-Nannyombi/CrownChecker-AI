@@ -7,15 +7,15 @@
   --font-display: "Plus Jakarta Sans", sans-serif;
 
   /* Colors: CrownCheck Editorial Palette */
-  --color-surface: #0A050A; /* Deep Plum Black */
-  --color-on-surface: #FFFFFF;
-  --color-on-surface-variant: #A19DA7;
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
   
-  --color-surface-container-lowest: #050205;
-  --color-surface-container-low: #120A12;
-  --color-surface-container: #1A0F1A;
-  --color-surface-container-high: #241524;
-  --color-surface-container-highest: #2D1B2D;
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
   
   --color-primary: #D988B9; /* Vibrant Pink */
   --color-primary-dark: #623253; /* Deep Plum */
@@ -24,16 +24,42 @@
   --color-secondary: #3D3B41;
   --color-accent: #18CB96;
   
-  --color-outline-variant: rgba(217, 136, 185, 0.15);
+  --color-outline-variant: var(--outline-variant);
 
   /* Radius */
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
 }
 
+:root {
+  /* Dark Mode (Default) */
+  --surface: #0A050A;
+  --on-surface: #FFFFFF;
+  --on-surface-variant: #A19DA7;
+  --surface-container-lowest: #050205;
+  --surface-container-low: #120A12;
+  --surface-container: #1A0F1A;
+  --surface-container-high: #241524;
+  --surface-container-highest: #2D1B2D;
+  --outline-variant: rgba(217, 136, 185, 0.15);
+}
+
+:root.light {
+  /* Light Mode */
+  --surface: #FCF8FC;
+  --on-surface: #1A0F1A;
+  --on-surface-variant: #625B62;
+  --surface-container-lowest: #FFFFFF;
+  --surface-container-low: #F5EEF5;
+  --surface-container: #EEE4EE;
+  --surface-container-high: #E7DAE7;
+  --surface-container-highest: #E0D0E0;
+  --outline-variant: rgba(98, 50, 83, 0.1);
+}
+
 @layer base {
   body {
-    @apply bg-surface text-on-surface font-sans antialiased;
+    @apply bg-surface text-on-surface font-sans antialiased transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -51,18 +77,18 @@
   }
 
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    @apply bg-on-surface/[0.05] backdrop-blur-xl border border-on-surface/[0.1];
   }
 
   .btn-gradient {
-    @apply px-8 py-4 rounded-lg bg-gradient-to-r from-[#D988B9] to-[#623253] text-white font-bold transition-all hover:opacity-90 active:scale-95;
+    @apply px-8 py-4 rounded-lg bg-gradient-to-r from-[#D988B9] to-[#623253] text-white font-bold transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary/20;
   }
 
   .btn-outline {
-    @apply px-8 py-4 rounded-lg bg-white/5 border border-white/10 text-white font-bold transition-all hover:bg-white/10;
+    @apply px-8 py-4 rounded-lg bg-on-surface/[0.05] border border-on-surface/[0.1] text-on-surface font-bold transition-all hover:bg-on-surface/[0.1];
   }
 
   .badge {
-    @apply px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold uppercase tracking-widest text-white/60;
+    @apply px-3 py-1 rounded-full bg-on-surface/[0.1] text-[10px] font-bold uppercase tracking-widest text-on-surface/60;
   }
 }
