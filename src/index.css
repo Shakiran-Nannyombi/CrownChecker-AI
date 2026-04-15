@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+
+  /* Colors: CrownCheck Editorial Palette */
+  --color-surface: #0A050A; /* Deep Plum Black */
+  --color-on-surface: #FFFFFF;
+  --color-on-surface-variant: #A19DA7;
+  
+  --color-surface-container-lowest: #050205;
+  --color-surface-container-low: #120A12;
+  --color-surface-container: #1A0F1A;
+  --color-surface-container-high: #241524;
+  --color-surface-container-highest: #2D1B2D;
+  
+  --color-primary: #D988B9; /* Vibrant Pink */
+  --color-primary-dark: #623253; /* Deep Plum */
+  --color-on-primary: #FFFFFF;
+  
+  --color-secondary: #3D3B41;
+  --color-accent: #18CB96;
+  
+  --color-outline-variant: rgba(217, 136, 185, 0.15);
+
+  /* Radius */
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .display-hero {
+    @apply font-display text-7xl md:text-9xl font-extrabold leading-[0.9] tracking-[-0.04em];
+  }
+  
+  .headline-section {
+    @apply font-display text-4xl md:text-6xl font-bold tracking-[-0.02em];
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .btn-gradient {
+    @apply px-8 py-4 rounded-lg bg-gradient-to-r from-[#D988B9] to-[#623253] text-white font-bold transition-all hover:opacity-90 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply px-8 py-4 rounded-lg bg-white/5 border border-white/10 text-white font-bold transition-all hover:bg-white/10;
+  }
+
+  .badge {
+    @apply px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold uppercase tracking-widest text-white/60;
+  }
+}

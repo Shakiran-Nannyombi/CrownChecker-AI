@@ -1,0 +1,6 @@
+{
+  "name": "CrownCheck AI",
+  "description": "Editorial Precision in Augmented Reality: A high-end digital lookbook for luxury grooming and hairstyle visualization.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["AR Hairstyle Visualization", "AI Hair Detection"]
+}
