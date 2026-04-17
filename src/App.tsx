@@ -16,7 +16,7 @@ import PlaceholderView from "./views/PlaceholderView";
 
 export default function App() {
   const [view, setView] = useState<View>("landing");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [redirectView, setRedirectView] = useState<View | null>(null);
 

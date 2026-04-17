@@ -53,20 +53,14 @@ export default function LandingView({
             { value: '1,200+', label: 'Expert Consultants' },
           ]}
           images={[
-            // Central — Black man, sharp fade
-            "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=600",
-            // Top-Left — Black woman, natural hair
-            "https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80&w=400",
-            // Top-Right — Black man, textured crop
-            "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=400",
-            // Bottom-Right — Black woman, braids
-            "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&q=80&w=400",
-            // Far-Right — Black man, locs
-            "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&q=80&w=400",
-            // Bottom-Left — Black woman, afro
-            "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400",
-            // Far-Left — Black man, waves
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+            // [0] Main portrait — verified: Black man with beard, clean portrait (consultant #1)
+            "https://images.unsplash.com/photo-1657273363317-c2cb4d2d1e16?auto=format&fit=crop&q=80&w=800&h=1000",
+            // [1] Review avatar — verified: man brushing afro in barbershop (Kingsley Hemans)
+            "https://images.unsplash.com/photo-1674267521468-88f139e6c52b?auto=format&fit=crop&q=80&w=100",
+            // [2] Style card thumb — verified: taper fade + beard (lookbook Fades)
+            "https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&q=80&w=120",
+            // [3] Extra — verified: natural afro smiling (lookbook Afro)
+            "https://images.unsplash.com/photo-1534351842133-0db61b907aac?auto=format&fit=crop&q=80&w=120",
           ]}
         />
 
@@ -106,7 +100,6 @@ export default function LandingView({
           <div className="container mx-auto px-8">
             <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
               <div className="max-w-2xl">
-                <span className="font-sans text-xs uppercase tracking-[0.2em] text-outline mb-4 block">Core Capabilities</span>
                 <h2 className="headline-section">Everything you need <br />to refine your look.</h2>
               </div>
               <div className="flex gap-4">
@@ -131,10 +124,11 @@ export default function LandingView({
                   </p>
                 </div>
                 <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-40 group-hover:opacity-100 transition-opacity duration-500">
+                  {/* verified: Black barber cutting client's fade — barbershop in Virginia */}
                   <img
                     className="w-full h-full object-cover rounded-tl-[4rem]"
-                    alt="AR scan on phone"
-                    src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=600"
+                    alt="Barber precision fade"
+                    src="https://images.unsplash.com/photo-1567894340315-735d7c361db0?auto=format&fit=crop&q=80&w=700"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -175,9 +169,12 @@ export default function LandingView({
                 </div>
                 <div className="flex -space-x-3 pt-8">
                   {[
-                    "https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80&w=100",
-                    "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=100",
-                    "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&q=80&w=100",
+                    // verified: afro + beard (lookbook Afro #3)
+                    "https://images.unsplash.com/photo-1643904524791-2ca626c9b54c?auto=format&fit=crop&q=80&w=100",
+                    // verified: cornrow feed-ins (lookbook Cornrows)
+                    "https://images.unsplash.com/photo-1673470907547-1c0c6a996095?auto=format&fit=crop&q=80&w=100",
+                    // verified: natural locs (lookbook Locs)
+                    "https://images.unsplash.com/photo-1653263169788-9332cdbf07f5?auto=format&fit=crop&q=80&w=100",
                   ].map((src, i) => (
                     <div key={i} className="w-12 h-12 rounded-full border-2 border-surface-container-high overflow-hidden">
                       <img src={src} className="w-full h-full object-cover" alt="style" referrerPolicy="no-referrer" />
@@ -197,10 +194,11 @@ export default function LandingView({
                   </p>
                 </div>
                 <div className="w-48 h-48 rounded-2xl overflow-hidden shrink-0 hidden md:block">
+                  {/* verified: Black man with beard — consultant profile (Consultants page) */}
                   <img
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    alt="Professional stylist"
-                    src="https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&q=80&w=400"
+                    alt="Professional stylist consultant"
+                    src="https://images.unsplash.com/photo-1657273363317-c2cb4d2d1e16?auto=format&fit=crop&q=80&w=400"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -211,24 +209,29 @@ export default function LandingView({
 
       </main>
 
-      {/* Bottom — theme-aware radial gradient: surface-lowest → primary-container glow */}
+      {/* Bottom gradient + CTA */}
       <div
         className="relative"
         style={{
           background:
-            "radial-gradient(ellipse 120% 60% at 50% 100%, var(--color-primary-container), var(--color-surface-container-lowest))",
+            "radial-gradient(ellipse 120% 60% at 50% 100%, color-mix(in srgb, var(--color-primary-container) 60%, var(--color-surface)), var(--color-surface))",
         }}
       >
-
-        {/* CTA Section */}
         <section className="py-32 relative">
           <div className="container mx-auto px-8">
-            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-[3rem] p-12 md:p-24 text-center space-y-8 relative overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none">
-                <div className="w-full h-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-              </div>
-              <h2 className="text-5xl md:text-7xl font-display font-extrabold tracking-tighter relative z-10 text-white">Ready to redefine <br />your reflection?</h2>
-              <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto font-sans relative z-10">
+            <div className="rounded-[3rem] p-12 md:p-24 text-center space-y-8 relative overflow-hidden shadow-2xl border border-primary/15"
+              style={{ background: "color-mix(in srgb, var(--color-primary-container) 20%, var(--color-surface-container))" }}>
+
+              {/* Subtle inner glow */}
+              <div
+                className="absolute inset-0 pointer-events-none rounded-[3rem]"
+                style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent)" }}
+              />
+
+              <h2 className="text-5xl md:text-7xl font-display font-extrabold tracking-tighter relative z-10 text-on-surface">
+                Ready to redefine <br />your reflection?
+              </h2>
+              <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto font-sans relative z-10">
                 Download CrownCheck AI and discover the hairstyle you were meant to wear.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 relative z-10">

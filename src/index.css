@@ -127,12 +127,25 @@
 }
 
 @layer base {
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
     background-color: var(--color-surface);
     color: var(--color-on-surface);
     font-family: 'Manrope', sans-serif;
     transition: background-color 0.3s, color 0.3s;
     -webkit-font-smoothing: antialiased;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
   }
 
   h1,

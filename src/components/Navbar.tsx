@@ -25,15 +25,21 @@ export default function Navbar({
         <div className="flex items-center gap-8">
           <button
             onClick={() => onNavigate("landing")}
-            className="flex items-center gap-2 hover:opacity-80 transition-all"
+            className="flex items-center gap-2 hover:opacity-90 transition-all"
           >
             <img
               src="/logo-nobackground.png"
               alt="CrownCheck AI"
-              className="h-8 w-auto"
+              className="h-11 w-auto"
             />
-            <span className="text-2xl font-black tracking-tighter text-primary font-display">
-              CrownCheck AI
+            <span
+              className="text-3xl font-black tracking-tighter font-display bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 40%, var(--color-tertiary) 70%, var(--color-primary) 100%)",
+              }}
+            >
+              CrownCheck<span className="opacity-80"> AI</span>
             </span>
           </button>
           <div className="hidden md:flex gap-6 items-center">
