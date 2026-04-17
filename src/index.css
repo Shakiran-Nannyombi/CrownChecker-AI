@@ -172,7 +172,7 @@
   }
 
   .btn-primary {
-    @apply px-10 py-5 bg-gradient-to-br from-primary to-primary-container text-on-primary font-display font-bold rounded-xl shadow-lg hover:opacity-90 transition-all active:scale-95 text-lg;
+    @apply px-10 py-5 bg-linear-to-br from-primary to-primary-container text-on-primary font-display font-bold rounded-xl shadow-lg hover:opacity-90 transition-all active:scale-95 text-lg;
   }
 
   .btn-secondary {

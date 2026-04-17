@@ -25,9 +25,16 @@ export default function Navbar({
         <div className="flex items-center gap-8">
           <button
             onClick={() => onNavigate("landing")}
-            className="text-2xl font-black tracking-tighter text-primary font-display hover:opacity-80 transition-all"
+            className="flex items-center gap-2 hover:opacity-80 transition-all"
           >
-            CrownCheck AI
+            <img
+              src="/logo-nobackground.png"
+              alt="CrownCheck AI"
+              className="h-8 w-auto"
+            />
+            <span className="text-2xl font-black tracking-tighter text-primary font-display">
+              CrownCheck AI
+            </span>
           </button>
           <div className="hidden md:flex gap-6 items-center">
             {[

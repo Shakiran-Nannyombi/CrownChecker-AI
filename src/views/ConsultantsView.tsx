@@ -4,18 +4,18 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { View } from "../types";
 
-export default function ConsultantsView({ 
-  onBack, 
-  onNavigate, 
-  onLogout, 
-  theme, 
-  toggleTheme 
-}: { 
-  onBack: () => void; 
-  onNavigate: (view: View) => void; 
-  onLogout: () => void; 
-  theme: "dark" | "light"; 
-  toggleTheme: () => void 
+export default function ConsultantsView({
+  onBack,
+  onNavigate,
+  onLogout,
+  theme,
+  toggleTheme
+}: {
+  onBack: () => void;
+  onNavigate: (view: View) => void;
+  onLogout: () => void;
+  theme: "dark" | "light";
+  toggleTheme: () => void
 }) {
   const [activeFilter, setActiveFilter] = useState("All Masters");
   const filters = ["All Masters", "Precision Fades", "Avant-Garde Color", "Sculptural Form"];
@@ -28,29 +28,43 @@ export default function ConsultantsView({
       exit={{ opacity: 0 }}
       className="min-h-screen flex flex-col bg-surface"
     >
-      <Navbar 
+      <Navbar
         currentView="consultants"
         onNavigate={onNavigate}
-        isLoggedIn={true} 
+        isLoggedIn={true}
         onLogout={onLogout}
         theme={theme}
         toggleTheme={toggleTheme}
       />
 
-      <main className="pt-28 pb-32 px-6 md:px-12 max-w-7xl mx-auto">
-        {/* Header Section */}
-        <header className="mb-16 space-y-4">
+      {/* ── Full-bleed hero ── */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(to right, color-mix(in srgb, var(--color-primary) 5%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--color-primary) 5%, transparent) 1px, transparent 1px)`,
+          backgroundSize: '6rem 4rem',
+        }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(circle 900px at 0% 0%, color-mix(in srgb, var(--color-primary-container) 55%, transparent), transparent)' }}
+        />
+        <div className="absolute bottom-0 inset-x-0 h-40 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, var(--color-surface))' }} />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-20 space-y-4">
           <div className="badge border border-primary/20">
             <span className="material-symbols-outlined text-primary text-[18px] mr-2" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             Certified AI Visionaries
           </div>
           <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tighter leading-none text-on-surface max-w-4xl">
-            The Marketplace of <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-tertiary">Future Forms</span>
+            The Marketplace of <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-secondary to-tertiary">Future Forms</span>
           </h1>
           <p className="text-on-surface-variant text-lg max-w-2xl leading-relaxed font-sans">
             Connect with elite stylists who bridge the gap between AI-simulated aesthetics and master craftsmanship. From precision fades to digital-first color transformations.
           </p>
-        </header>
+        </div>
+      </div>
+
+      <main className="pb-32 px-6 md:px-12 max-w-7xl mx-auto">
 
         {/* Filters */}
         <section className="mb-12 flex flex-wrap gap-4 items-center">
@@ -58,16 +72,15 @@ export default function ConsultantsView({
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2.5 rounded-full font-sans text-sm border transition-all ${
-                activeFilter === filter
-                  ? "bg-primary-container text-on-primary-container font-semibold border-primary/30"
-                  : "bg-surface-container-low text-on-surface-variant hover:text-primary border-outline-variant/10 font-medium"
-              }`}
+              className={`px-6 py-2.5 rounded-full font-sans text-sm border transition-all ${activeFilter === filter
+                ? "bg-primary-container text-on-primary-container font-semibold border-primary/30"
+                : "bg-surface-container-low text-on-surface-variant hover:text-primary border-outline-variant/10 font-medium"
+                }`}
             >
               {filter}
             </button>
           ))}
-          <div className="h-6 w-[1px] bg-outline-variant/30 mx-2 hidden md:block"></div>
+          <div className="h-6 w-px bg-outline-variant/30 mx-2 hidden md:block"></div>
           <button className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-all text-sm font-medium font-sans">
             <span className="material-symbols-outlined text-[18px]">tune</span>
             Refine Vision
@@ -77,14 +90,14 @@ export default function ConsultantsView({
         {/* Consultant Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Consultant 1: Elena Kross */}
-          <article className="md:col-span-8 group relative overflow-hidden rounded-[2rem] bg-surface-container shadow-2xl transition-all hover:-translate-y-1 aspect-video md:aspect-[16/9]">
+          <article className="md:col-span-8 group relative overflow-hidden rounded-[2rem] bg-surface-container shadow-2xl transition-all hover:-translate-y-1 aspect-video md:aspect-video">
             <div className="absolute inset-0 z-0">
-              <img 
-                className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" 
-                alt="Elena Kross" 
-                src="https://images.unsplash.com/photo-1599351431247-f10b21ce5602?auto=format&fit=crop&q=80&w=1000" 
+              <img
+                className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+                alt="Elena Kross"
+                src="https://images.unsplash.com/photo-1599351431247-f10b21ce5602?auto=format&fit=crop&q=80&w=1000"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/40 to-transparent"></div>
             </div>
             <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-12 space-y-6">
               <div className="flex justify-between items-end">
@@ -108,10 +121,10 @@ export default function ConsultantsView({
                 </div>
               </div>
               <div className="flex flex-col md:flex-row gap-4">
-                <button className="flex-1 md:flex-none px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-tight transition-all active:scale-95 shadow-[0_0_20px_rgba(244,179,219,0.3)] font-display">
+                <button className="flex-1 md:flex-none px-8 py-4 rounded-xl bg-linear-to-r from-primary to-primary-container text-on-primary font-bold tracking-tight transition-all active:scale-95 shadow-[0_0_20px_rgba(244,179,219,0.3)] font-display">
                   Book AR Consultation
                 </button>
-                <button 
+                <button
                   onClick={() => onNavigate("lookbook")}
                   className="flex-1 md:flex-none px-8 py-4 rounded-xl bg-surface-container-highest/60 backdrop-blur-md text-on-surface font-semibold border border-outline-variant/30 hover:bg-surface-container-highest transition-all font-display"
                 >
@@ -124,10 +137,10 @@ export default function ConsultantsView({
           {/* Consultant 2: Marcus Thorne */}
           <article className="md:col-span-4 group flex flex-col bg-surface-container rounded-[2rem] overflow-hidden transition-all hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-xl">
             <div className="h-64 overflow-hidden relative">
-              <img 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                alt="Marcus Thorne" 
-                src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=600" 
+              <img
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                alt="Marcus Thorne"
+                src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=600"
               />
               <div className="absolute top-4 right-4 bg-surface/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -158,11 +171,11 @@ export default function ConsultantsView({
 
           {/* Consultant 3: Sasha Vane */}
           <article className="md:col-span-12 flex flex-col md:flex-row items-center gap-8 p-8 rounded-[2rem] bg-surface-container border border-outline-variant/10 hover:border-primary/20 transition-all group">
-            <div className="w-40 h-40 flex-shrink-0 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors">
-              <img 
-                className="w-full h-full object-cover" 
-                alt="Sasha Vane" 
-                src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=300" 
+            <div className="w-40 h-40 shrink-0 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors">
+              <img
+                className="w-full h-full object-cover"
+                alt="Sasha Vane"
+                src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&q=80&w=300"
               />
             </div>
             <div className="flex-1 text-center md:text-left space-y-2">
@@ -190,7 +203,7 @@ export default function ConsultantsView({
             { name: "Miki Sato", tag: "Cyber-Organic Forms", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200", rating: 4 }
           ].map((c) => (
             <article key={c.name} className="md:col-span-6 bg-surface-container-low rounded-[2rem] p-8 flex gap-6 items-start hover:bg-surface-container transition-colors border border-outline-variant/5 group">
-              <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0">
                 <img className="w-full h-full object-cover" alt={c.name} src={c.img} />
               </div>
               <div className="space-y-4">
@@ -232,10 +245,10 @@ export default function ConsultantsView({
               </div>
             </div>
             <div className="relative h-96 md:h-full rounded-3xl overflow-hidden min-h-[400px]">
-              <img 
-                className="w-full h-full object-cover" 
-                alt="AR Tech" 
-                src="https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=1000" 
+              <img
+                className="w-full h-full object-cover"
+                alt="AR Tech"
+                src="https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=1000"
               />
               <div className="absolute inset-0 bg-primary/20 backdrop-overlay pointer-events-none mix-blend-overlay"></div>
             </div>

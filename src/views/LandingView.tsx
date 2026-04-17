@@ -43,7 +43,7 @@ export default function LandingView({
       <main>
         {/* Hero Section */}
         <HeroCollage
-          title={<>Find your <span className="text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">crown.</span></>}
+          title={<>Find your <span className="text-transparent bg-clip-text bg-linear-to-br from-primary to-secondary">crown.</span></>}
           subtitle="AI-powered precision meets high-fashion artistry. Scan your profile and visualize your next transformation in stunning AR."
           onCTA={onStart}
           onSecondary={() => onNavigate("lookbook")}
@@ -53,13 +53,20 @@ export default function LandingView({
             { value: '1,200+', label: 'Expert Consultants' },
           ]}
           images={[
-            "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=600",
-            "https://images.unsplash.com/photo-1599351431247-f10b21ce5602?auto=format&fit=crop&q=80&w=400",
-            "https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=400",
-            "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80&w=400",
-            "https://images.unsplash.com/photo-1592647425550-8fe915cfa1f7?auto=format&fit=crop&q=80&w=400",
-            "https://images.unsplash.com/photo-1516914915600-240abe828880?auto=format&fit=crop&q=80&w=400",
-            "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&q=80&w=400",
+            // Central — Black man, sharp fade
+            "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=600",
+            // Top-Left — Black woman, natural hair
+            "https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80&w=400",
+            // Top-Right — Black man, textured crop
+            "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=400",
+            // Bottom-Right — Black woman, braids
+            "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&q=80&w=400",
+            // Far-Right — Black man, locs
+            "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&q=80&w=400",
+            // Bottom-Left — Black woman, afro
+            "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=400",
+            // Far-Left — Black man, waves
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
           ]}
         />
 
@@ -126,8 +133,9 @@ export default function LandingView({
                 <div className="absolute right-0 bottom-0 w-1/2 h-full opacity-40 group-hover:opacity-100 transition-opacity duration-500">
                   <img
                     className="w-full h-full object-cover rounded-tl-[4rem]"
-                    alt="Smartphone scan UI"
-                    src="https://images.unsplash.com/photo-1621605815841-28d944683b83?auto=format&fit=crop&q=80&w=600"
+                    alt="AR scan on phone"
+                    src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=600"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               </div>
@@ -165,14 +173,18 @@ export default function LandingView({
                     Access a global library of styles curated by world-class barbers and digital stylists.
                   </p>
                 </div>
-                <div className="flex gap-2 pt-8">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
-                      <img src={`https://images.unsplash.com/photo-${i === 1 ? '1585747860715-2ba37e788b70' : i === 2 ? '1592647425550-8fe915cfa1f7' : '1605497788044-5a32c7078486'}?auto=format&fit=crop&q=80&w=100`} className="w-full h-full object-cover" />
+                <div className="flex -space-x-3 pt-8">
+                  {[
+                    "https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80&w=100",
+                    "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=100",
+                    "https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&q=80&w=100",
+                  ].map((src, i) => (
+                    <div key={i} className="w-12 h-12 rounded-full border-2 border-surface-container-high overflow-hidden">
+                      <img src={src} className="w-full h-full object-cover" alt="style" referrerPolicy="no-referrer" />
                     </div>
                   ))}
-                  <div className="w-12 h-12 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center">
-                    <span className="text-xs">+500</span>
+                  <div className="w-12 h-12 rounded-full bg-surface-container-highest border-2 border-surface-container-high flex items-center justify-center">
+                    <span className="text-xs font-bold">+500</span>
                   </div>
                 </div>
               </div>
@@ -188,7 +200,8 @@ export default function LandingView({
                   <img
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                     alt="Professional stylist"
-                    src="https://images.unsplash.com/photo-1516914915600-240abe828880?auto=format&fit=crop&q=80&w=600"
+                    src="https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&q=80&w=400"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               </div>
@@ -196,15 +209,26 @@ export default function LandingView({
           </div>
         </section>
 
+      </main>
+
+      {/* Bottom — theme-aware radial gradient: surface-lowest → primary-container glow */}
+      <div
+        className="relative"
+        style={{
+          background:
+            "radial-gradient(ellipse 120% 60% at 50% 100%, var(--color-primary-container), var(--color-surface-container-lowest))",
+        }}
+      >
+
         {/* CTA Section */}
         <section className="py-32 relative">
           <div className="container mx-auto px-8">
-            <div className="bg-gradient-to-br from-primary-container to-surface-container-highest rounded-[3rem] p-12 md:p-24 text-center space-y-8 relative overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none">
-                <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-[3rem] p-12 md:p-24 text-center space-y-8 relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none">
+                <div className="w-full h-full bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
               </div>
-              <h2 className="text-5xl md:text-7xl font-display font-extrabold tracking-tighter relative z-10">Ready to redefine <br />your reflection?</h2>
-              <p className="text-xl md:text-2xl text-on-primary-container max-w-2xl mx-auto font-sans opacity-90 relative z-10">
+              <h2 className="text-5xl md:text-7xl font-display font-extrabold tracking-tighter relative z-10 text-white">Ready to redefine <br />your reflection?</h2>
+              <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto font-sans relative z-10">
                 Download CrownCheck AI and discover the hairstyle you were meant to wear.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 relative z-10">
@@ -215,9 +239,9 @@ export default function LandingView({
             </div>
           </div>
         </section>
-      </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </motion.div>
   );
 }

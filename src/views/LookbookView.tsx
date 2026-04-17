@@ -5,18 +5,18 @@ import Footer from "../components/Footer";
 import LookCard from "../components/LookCard";
 import { View } from "../types";
 
-export default function LookbookView({ 
-  onBack, 
-  onNavigate, 
-  onLogout, 
-  theme, 
-  toggleTheme 
-}: { 
-  onBack: () => void; 
-  onNavigate: (view: View) => void; 
-  onLogout: () => void; 
-  theme: "dark" | "light"; 
-  toggleTheme: () => void 
+export default function LookbookView({
+  onBack,
+  onNavigate,
+  onLogout,
+  theme,
+  toggleTheme
+}: {
+  onBack: () => void;
+  onNavigate: (view: View) => void;
+  onLogout: () => void;
+  theme: "dark" | "light";
+  toggleTheme: () => void
 }) {
   const [activeCategory, setActiveCategory] = useState("All Styles");
 
@@ -68,21 +68,32 @@ export default function LookbookView({
       exit={{ opacity: 0 }}
       className="min-h-screen flex flex-col bg-surface"
     >
-      <Navbar 
+      <Navbar
         currentView="lookbook"
         onNavigate={onNavigate}
-        isLoggedIn={true} 
+        isLoggedIn={true}
         onLogout={onLogout}
         theme={theme}
         toggleTheme={toggleTheme}
       />
 
-      <main className="pt-24 px-6 md:px-12 max-w-7xl mx-auto">
-        {/* Editorial Header Section */}
-        <header className="mb-16 mt-8 flex flex-col md:flex-row md:items-end justify-between gap-8">
+      {/* ── Full-bleed hero ── */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(to right, color-mix(in srgb, var(--color-primary) 5%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--color-primary) 5%, transparent) 1px, transparent 1px)`,
+          backgroundSize: '6rem 4rem',
+        }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(circle 900px at 100% 0%, color-mix(in srgb, var(--color-primary-container) 55%, transparent), transparent)' }}
+        />
+        <div className="absolute bottom-0 inset-x-0 h-40 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, var(--color-surface))' }} />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-2xl">
             <h1 className="text-5xl md:text-7xl font-extrabold font-display tracking-tighter text-on-surface mb-6 leading-none">
-              CROWN<br/><span className="text-primary italic">CHECK</span> LOOKS
+              CROWN<br /><span className="text-primary italic">CHECK</span> LOOKS
             </h1>
             <p className="text-lg text-on-surface-variant font-sans leading-relaxed opacity-80">
               A curated selection of styles analyzed against your unique facial structure. Discover your next evolution with technical precision and editorial grace.
@@ -93,9 +104,12 @@ export default function LookbookView({
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>blur_on</span>
               AI PROFILE ACTIVE
             </div>
-            <div className="h-[2px] w-32 bg-primary/20 self-start md:self-end"></div>
+            <div className="h-[2px] w-32 bg-primary/20 self-start md:self-end" />
           </div>
-        </header>
+        </div>
+      </div>
+
+      <main className="px-6 md:px-12 max-w-7xl mx-auto">
 
         {/* Filters Section */}
         <section className="mb-12">
@@ -105,11 +119,10 @@ export default function LookbookView({
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-6 py-2.5 rounded-full font-bold font-sans text-sm transition-all ${
-                    activeCategory === cat
+                  className={`px-6 py-2.5 rounded-full font-bold font-sans text-sm transition-all ${activeCategory === cat
                       ? "bg-primary text-on-primary shadow-lg shadow-primary/20"
                       : "bg-surface-container-low text-on-surface-variant hover:bg-surface-bright"
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -140,7 +153,7 @@ export default function LookbookView({
       </main>
 
       {/* Floating Action Button */}
-      <button className="fixed bottom-8 right-8 z-[60] bg-gradient-to-br from-primary to-primary-container text-on-primary p-5 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all hidden md:flex items-center gap-3 font-display">
+      <button className="fixed bottom-8 right-8 z-60 bg-linear-to-br from-primary to-primary-container text-on-primary p-5 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all hidden md:flex items-center gap-3 font-display">
         <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>view_in_ar</span>
         <span className="font-bold uppercase text-xs tracking-widest">Live Preview</span>
       </button>
